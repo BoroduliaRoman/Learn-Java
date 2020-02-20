@@ -1,7 +1,12 @@
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SimpleChatBot extends JFrame {
+public class SimpleChatBot extends JFrame implements ActionListener { // Создаём главный класс, который наследует класс
+    // JF. и реализует интерфейс(абстрактный класс, который имеет дохуя функций)
 
     // Константы
     final String TITLE_OF_PROGRAM = "Chatter: simple chatbot"; // Заголовок прграммы
@@ -27,19 +32,21 @@ public class SimpleChatBot extends JFrame {
         // Диалоговое окно
         dialogue = new JTextArea(); // Создаём обьект от обьявленной переменной... Наверное...???
         dialogue.setLineWrap(true); // Метод: строки будут переносится на новую линию
-        JScrollPane scrollBar = new JScrollPane(dialogue); // Метод: создаём обьект "скроллер" который который будет находиться в переменной dialogue
+        JScrollPane scrollBar = new JScrollPane(dialogue); // Метод: создаём обьект "скроллер" который который будет
+                                                           // находиться в переменной dialogue
 
         // Создаём панель на которой будут размещаться наши кнопки
         JPanel bp = new JPanel(); // Создаём обьект button panel класса JPanel
-        bp.setLayout(new BoxLayout(bp, BoxLayout.X_AXIS)); // Метод: добавляем какой-то ебаный лайаут, который наследуется классом BoxLayout, который содержит в себе наш обьект с кнопками и размещаем его по горизонтали... Наверное блять????
+        bp.setLayout(new BoxLayout(bp, BoxLayout.X_AXIS)); // Метод: добавляем какой-то ебаный лайаут, который
+        // наследуется классом BoxLayout, который содержит в себе наш обьект с кнопками и размещаем его по горизонтали... Наверное блять????
         ai = new JCheckBox("AI"); // Создаём обьект - чек-бокс класса JCheckBox с ниразу не громким названием ИИ))))))))))))
         //ai.doClick();
         message = new JTextField(); // Создаём обьект класса JTF... (поле в которое мы будем писать команды)
-        //message.addActionListener(this);
+        message.addActionListener(this); // Метод: который позволяет сделать тоже самое что и  enter.addActionListener, но при нажатии enter на клавиатуре
         JButton enter = new JButton("Enter"); // Создаём кнопку Энтер класса JB
-        //enter.addActionListener(this);
+        enter.addActionListener(this); // Метод: который фиксирует что мы нажали на кнопку и запустит метод actionPerformed??
 
-        // Добавляем элементы(обьекты) на панель
+        // Добавляем элементы(обьекты) на нижнюю панель
         bp.add(ai);
         bp.add(message);
         bp.add(enter);
@@ -48,5 +55,15 @@ public class SimpleChatBot extends JFrame {
         add(BorderLayout.SOUTH, bp); // Метод: добавляем нижнюю панель с кнопками
 
         setVisible(true); // Метод: делаем нашу программу видимой
+    }
+
+    // Делаем какую-то йобань, чтоб абстрактный интерфейс мог быть реализован(наверное, чтоб мы могли пользоваться функциями абстрактного класса)
+    @Override // - Какая-то хуйня из ООП, которую мне просто не дано никогда понять(
+    public void actionPerformed(ActionEvent event){ // Метод, который переопределяет какую-то ебаную процедуру, благодаря которой мы сможем отлавливать события при нажатии клавиш???
+        if (message.getText().trim().length() > 0) { // Оператор с условием - если (в обьект попадает текст в котором мы убираем пробелы и этот текст содержит больше 0 символов, то)
+            dialogue.append(message.getText() + "\n"); // То в окно бота добавляем (текст обьекта с поля ввода и переносим на новую строку)
+        }
+        message.setText(""); // Метод обьекта поля ввода отображает пустоту. Нахуя? Не понятно....
+        message.requestFocusInWindow(); // Неведомая для меня поебота, почитал на англ. форумах, всё равно нихуя не понял
     }
 }
