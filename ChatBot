@@ -1,0 +1,52 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class SimpleChatBot extends JFrame {
+
+    // Константы
+    final String TITLE_OF_PROGRAM = "Chatter: simple chatbot"; // Заголовок прграммы
+    final int START_LOCATION = 200; // Стартовая позиция окна
+    final int WINDOW_WITH = 350; // Ширина окна
+    final int WINDOW_HEIGHT = 450; // Высота окна
+
+    // Переменные (графические обьекты, которые будут появлятся на экране)
+    JTextArea dialogue;
+    JCheckBox ai;
+    JTextField message;
+    //SimpleBot sbot;
+
+    public static void main(String[] args) {
+        new SimpleChatBot(); // Обьект главного класса
+    }
+
+    SimpleChatBot() { // Конструктор обьекта главного класса
+        setTitle(TITLE_OF_PROGRAM); // Метод: Добавляем название программы
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // Метод: Останавливать работу программы при закрытии
+        setBounds(START_LOCATION, START_LOCATION, WINDOW_WITH, WINDOW_HEIGHT); // Метод: Отрисовываем окно
+
+        // Диалоговое окно
+        dialogue = new JTextArea(); // Создаём обьект от обьявленной переменной... Наверное...???
+        dialogue.setLineWrap(true); // Метод: строки будут переносится на новую линию
+        JScrollPane scrollBar = new JScrollPane(dialogue); // Метод: создаём обьект "скроллер" который который будет находиться в переменной dialogue
+
+        // Создаём панель на которой будут размещаться наши кнопки
+        JPanel bp = new JPanel(); // Создаём обьект button panel класса JPanel
+        bp.setLayout(new BoxLayout(bp, BoxLayout.X_AXIS)); // Метод: добавляем какой-то ебаный лайаут, который наследуется классом BoxLayout, который содержит в себе наш обьект с кнопками и размещаем его по горизонтали... Наверное блять????
+        ai = new JCheckBox("AI"); // Создаём обьект - чек-бокс класса JCheckBox с ниразу не громким названием ИИ))))))))))))
+        //ai.doClick();
+        message = new JTextField(); // Создаём обьект класса JTF... (поле в которое мы будем писать команды)
+        //message.addActionListener(this);
+        JButton enter = new JButton("Enter"); // Создаём кнопку Энтер класса JB
+        //enter.addActionListener(this);
+
+        // Добавляем элементы(обьекты) на панель
+        bp.add(ai);
+        bp.add(message);
+        bp.add(enter);
+
+        add(BorderLayout.CENTER, scrollBar); // Метод: мы размещаем наш обьект в центр и добавляем обьект скроллер в котором наша переменная - dialogue
+        add(BorderLayout.SOUTH, bp); // Метод: добавляем нижнюю панель с кнопками
+
+        setVisible(true); // Метод: делаем нашу программу видимой
+    }
+}
